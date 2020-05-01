@@ -6,7 +6,11 @@ module.exports = {
 };
 
 function succeed(item) {
-  return { ...item };
+  if (item.enhancement >= 20) {
+    return item;
+  }
+  const updatedEnhancement = item.enhancement + 1;
+  return { ...item, enhancement: updatedEnhancement };
 }
 
 function fail(item) {
@@ -14,6 +18,10 @@ function fail(item) {
 }
 
 function repair(item) {
+  console.log(typeof item);
+  if (typeof item !== "object") {
+    throw new Error("Item must be an object");
+  }
   return { ...item, durability: 100 };
 }
 
