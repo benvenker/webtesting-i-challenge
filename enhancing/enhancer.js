@@ -14,11 +14,19 @@ function succeed(item) {
 }
 
 function fail(item) {
+  if (item.enhancement > 16) {
+    item.enhancement = item.enhancement - 1;
+  }
+  if (item.enhancement < 15) {
+    item.durability = item.durability + 5;
+    return { ...item };
+  } else if (item.enhancement >= 15) {
+    item.durability = item.durability + 10;
+  }
   return { ...item };
 }
 
 function repair(item) {
-  console.log(typeof item);
   if (typeof item !== "object") {
     throw new Error("Item must be an object");
   }
